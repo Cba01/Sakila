@@ -1,0 +1,47 @@
+1. SELECT a.city_id, city.city , c.first_name , c.last_name, c.email, a.address
+FROM customer as c
+JOIN address as a ON c.address_id = a.address_id
+JOIN city ON a.city_id = city.city_id
+WHERE a.city_id = 312
+
+2. SELECT * FROM film as f
+JOIN film_category as fc ON f.film_id = fc.film_id
+JOIN category as c ON fc.category_id = c.category_id
+WHERE c.name = 'Comedy'
+
+3. SELECT fa.actor_id, f.title, f.description, f.release_year
+FROM film as f
+JOIN film_actor as fa ON f.film_id = fa.film_id
+WHERE fa.actor_id = 5
+
+4. SELECT s.store_id, c.city_id, cus.first_name, cus.last_name, cus.email, a.address
+FROM customer as cus
+JOIN store as s ON cus.store_id = s.store_id
+JOIN address as a ON cus.address_id = a.address_id
+JOIN city as c ON a.city_id = c.city_id
+WHERE s.store_id = 1 AND c.city_id IN (1, 42, 312, 459)
+
+5. SELECT f.title, f.description, f.release_year, f.rating, f.special_features 
+FROM film as f
+JOIN film_actor as fa ON fa.film_id = f.film_id
+WHERE f.rating = "G" AND fa.actor_id = 15 AND f.special_features LIKE "%Behind the Scenes%";
+
+6. SELECT f.film_id, f.title, a.actor_id, CONCAT(a.first_name, ' ', a.last_name) AS nombre_actor
+FROM film as f
+JOIN film_actor as fa ON f.film_id = fa.film_id
+JOIN actor as a ON fa.actor_id = a.actor_id
+WHERE fa.film_id = 369;
+
+7. SELECT f.film_id ,f.title, f.description, f.release_year, f.rating, f.special_features, c.name, f.rental_rate
+FROM film as f
+JOIN film_category as fc ON f.film_id = fc.film_id
+JOIN category as c ON fc.category_id = c.category_id
+WHERE f.rental_rate = 2.99 AND c.name='drama';
+
+8. SELECT a.actor_id, CONCAT(a.first_name, ' ', a.last_name) AS actor_name, f.film_id, f.title, f.description, f.release_year, f.rating, f.special_features, c.name AS genre
+FROM film as f
+JOIN film_category as fc ON f.film_id = fc.film_id
+JOIN category as c ON fc.category_id = c.category_id
+JOIN film_actor as fa ON f.film_id = fa.film_id
+JOIN actor as a ON fa.actor_id = a.actor_id
+WHERE a.first_name ='Sandra' AND a.last_name = 'Kilmer' AND c.name = 'action';
